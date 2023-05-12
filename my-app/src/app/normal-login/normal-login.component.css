@@ -1,0 +1,19 @@
+div.flexbox {
+    display: flexbox;
+    flex-flow: row wrap;
+  }
+
+.input_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    margin-top: 4%;
+    margin-bottom: 5%;
+    gap: 5%;
+}
+
+div {
+    border-style: dotted;
+    border-color: red;
+}

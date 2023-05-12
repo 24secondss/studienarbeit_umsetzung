@@ -10,10 +10,15 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button'; 
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { AuthAppLoginComponent } from './auth-app-login/auth-app-login.component';
+import { NormalLoginComponent } from './normal-login/normal-login.component';
+import {MatCardModule} from '@angular/material/card'; 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AuthAppLoginComponent,
+    NormalLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatButtonModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

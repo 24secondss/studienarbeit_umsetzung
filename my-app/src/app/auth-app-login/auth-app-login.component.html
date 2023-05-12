@@ -1,0 +1,32 @@
+<div class="input_div">
+    <div>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title> Secret as String: </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>{{secretAsBase32}}</mat-card-content>
+        </mat-card> 
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title> Secret as QR-Code:</mat-card-title>
+            </mat-card-header>
+            <canvas id="canvas"></canvas>
+        </mat-card>     
+        <button mat-raised-button (click)="generate_new_secret()">
+            generate_new_secret
+        </button>
+    </div>
+    <div>
+        <mat-card>
+            <mat-card-header> Validate your Token </mat-card-header>
+            <mat-form-field appearance="fill">
+                <mat-label>Enter your Token</mat-label>
+                <input matInput type="text" [(ngModel)]="token">
+            </mat-form-field>
+            <button mat-raised-button (click)="validate_token()">
+                Validate
+            </button>
+            <mat-card-content> {{validationText}} </mat-card-content>
+        </mat-card>
+    </div>
+</div>

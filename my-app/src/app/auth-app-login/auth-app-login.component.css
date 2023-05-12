@@ -1,0 +1,14 @@
+div {
+    border-style: dotted;
+    border-color: blue;
+}
+
+.input_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    margin-top: 4%;
+    margin-bottom: 5%;
+    gap: 5%;
+}

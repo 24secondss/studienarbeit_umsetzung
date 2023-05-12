@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-normal-login',
+  templateUrl: './normal-login.component.html',
+  styleUrls: ['./normal-login.component.css']
 })
-export class AppComponent {
-  title = 'my-app';
+export class NormalLoginComponent {
   hide = true;
   username = "";
   password = "";
@@ -19,7 +18,6 @@ export class AppComponent {
 
   check_admin() {
     if (this.username == this.admin_username && this.password == this.admin_password) {
-      console.info("weeeee, rerouting");
       this.router.navigate(['/authApp'])
     }
     else {
