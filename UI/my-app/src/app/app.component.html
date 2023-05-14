@@ -1,0 +1,15 @@
+<html>
+  <header>
+    <title> Authenticator-App Demonstration </title>
+  </header>
+  <body>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your username</mat-label>
+      <input matInput type="text" [(ngModel)]="username">
+    </mat-form-field>
+    <button mat-raised-button (click)="check_login_method()">check_login_method</button>
+    <router-outlet></router-outlet>
+  </body>
+</html>
+
+
