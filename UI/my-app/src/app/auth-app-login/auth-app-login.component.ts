@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as OTPAuth from "otpauth";
 import { Secret } from 'otpauth';
 import * as QRCode from 'qrcode';
@@ -10,59 +10,38 @@ import * as QRCode from 'qrcode';
   styleUrls: ['./auth-app-login.component.css']
 })
 export class AuthAppLoginComponent {
-  secretAsBase32 = "";
   token = "";
   userSecret = new OTPAuth.Secret();
-  validationText = "";
 
-  constructor(private router:Router){}
+  constructor(private router:Router, private route: ActivatedRoute){}
 
-  generate_new_secret() {
-    const secret = new OTPAuth.Secret();
-    const totp = new OTPAuth.TOTP({
-      issuer: "ME",
-      label: "Test",
-      algorithm: "SHA1",
-      digits: 6,
-      period: 30,
-      secret: secret
-    });
-
-    this.secretAsBase32 = secret.base32;
-    this.userSecret = secret;
-    const authKey = totp.toString();
-
-    const canvas = document.getElementById('canvas');
-    QRCode.toCanvas(canvas, authKey, function (e) {
-      if (e) {
-        console.error(e);
-      }
-    })
-
-    console.log(totp.generate());
-    this.validationText = "";
-  }
-
-  validate_token() {
-    const totp = new OTPAuth.TOTP({
-      issuer: "ME",
-      label: "Test",
-      algorithm: "SHA1",
-      digits: 6,
-      period: 30,
-      secret: this.userSecret
-    });
-    const token = this.token;
-    const validation = totp.validate({ token, window: 1 });
-    if (validation == 0) {
-      this.validationText = "Token is valid";
-    }
-    else {
-      this.validationText = "Token is invalid"
-    }
-  }
-
-  logout() {
-    this.router.navigate(['']);
+  async login_with_token() {
+    await fetch("http://" + self.location.host + "/" + this.route.snapshot.params['username'])
+      .then(resp => resp.json())
+      .then(queryRes => {
+        console.log(queryRes.queryResult[0])
+        if (queryRes.queryResult[0] == null) {
+          console.error("NIX GEFUNDEN")
+        }
+        else {
+          const totp = new OTPAuth.TOTP({
+            issuer: this.route.snapshot.params['username'],
+            label: "Demo",
+            algorithm: "SHA1",
+            digits: 6,
+            period: 30,
+            secret: queryRes.queryResult[0].authAppSecret
+          });
+          const token = this.token;
+          const validation = totp.validate({ token, window: 1 });
+          if (validation == 0) {
+            this.router.navigate(['/logged-in'])
+          }
+          else {
+            console.log("Token invalid")
+            // Error anzeigen
+          }
+        }
+      })
   }
 }

@@ -12,13 +12,22 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { AuthAppLoginComponent } from './auth-app-login/auth-app-login.component';
 import { NormalLoginComponent } from './normal-login/normal-login.component';
-import {MatCardModule} from '@angular/material/card'; 
+import {MatCardModule} from '@angular/material/card';
+import { LoggedInScreenComponent } from './logged-in-screen/logged-in-screen.component';
+import { GiveUsernameComponent } from './give-username/give-username.component';
+import { StartsiteComponent } from './startsite/startsite.component';
+import { NewUserComponent } from './new-user/new-user.component'; 
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthAppLoginComponent,
-    NormalLoginComponent
+    NormalLoginComponent,
+    LoggedInScreenComponent,
+    GiveUsernameComponent,
+    StartsiteComponent,
+    NewUserComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +39,8 @@ import {MatCardModule} from '@angular/material/card';
     MatButtonModule,
     MatInputModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
