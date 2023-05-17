@@ -1,24 +1,29 @@
-<div class="input_div">
-    <mat-form-field appearance="fill">
-        <mat-label>Enter username</mat-label>
-        <input matInput type="text" [(ngModel)]="username">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-    </mat-form-field>
-    <mat-slide-toggle [(ngModel)]="authApp"> Authenticator-App </mat-slide-toggle>
-    <div *ngIf="authApp">
-        <button mat-raised-button (click)="generate_new_secret()"> Generate new Secret </button> 
-    </div>
-</div>
-<div class="input_div">
-    <canvas id="canvas"></canvas>
-</div>
 <div>
-    <button mat-raised-button (click)="saveNewUser()"> save new User </button> 
+    <mat-card>
+        <mat-form-field appearance="fill">
+            <mat-label>Benutzername</mat-label>
+            <input matInput type="text" [(ngModel)]="username">
+        </mat-form-field>
+        <mat-error> {{userErrorMsg}} </mat-error>
+        <mat-form-field appearance="fill">
+            <mat-label>Passwort</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-error> {{pwErrorMsg}} </mat-error>
+        <div>
+            <mat-slide-toggle [(ngModel)]="authApp"> Login per Authenticator-App </mat-slide-toggle>
+        </div>
+        <div *ngIf="authApp"> 
+            <button mat-raised-button (click)="generate_new_secret()"> Authenticator-Secret generieren </button> 
+        </div>
+        <div *ngIf="authApp">
+            <canvas id="canvas"></canvas>
+        </div>
+        <div>
+            <button mat-raised-button (click)="saveNewUser()"> Speichern </button> 
+        </div>
+    </mat-card>
 </div>
-

@@ -9,19 +9,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NormalLoginComponent {
   hide = true;
   password = "";
+  errorMsg = "";
 
   constructor(private router:Router, private route: ActivatedRoute){}
 
   async login_with_credentials() {
-    await fetch("http://" + self.location.host + "/" + this.route.snapshot.params['username'])
+    await fetch("http://" + self.location.host + "/api/" + this.route.snapshot.params['username'])
       .then(resp => resp.json())
       .then(queryRes => {
         if(queryRes.queryResult[0].password == this.password) {
-          this.router.navigate(['/logged-in'])
+          this.router.navigate(['/logged-in/pw'])
         }
         else {
           console.error("Password wrong")
-          // Error anzeigen
+          this.errorMsg = "Ungültiges Passwort"
         }
       })
   }

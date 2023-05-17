@@ -1,4 +1,4 @@
-<div class="input_div">
+<div>
     <mat-card>
         <mat-form-field appearance="fill">
             <mat-label>Enter your Token</mat-label>
@@ -7,5 +7,6 @@
         <button mat-raised-button (click)="login_with_token()">
             Login
         </button>
+        <mat-error> {{errorMsg}} </mat-error>
     </mat-card>
 </div>

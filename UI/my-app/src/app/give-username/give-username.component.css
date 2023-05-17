@@ -1,4 +1,4 @@
-.input_div {
+div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,9 +6,4 @@
     margin-top: 4%;
     margin-bottom: 5%;
     gap: 5%;
-}
-
-div {
-    border-style: dotted;
-    border-color: darkorange;
 }

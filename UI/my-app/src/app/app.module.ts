@@ -17,7 +17,8 @@ import { LoggedInScreenComponent } from './logged-in-screen/logged-in-screen.com
 import { GiveUsernameComponent } from './give-username/give-username.component';
 import { StartsiteComponent } from './startsite/startsite.component';
 import { NewUserComponent } from './new-user/new-user.component'; 
-import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component'; 
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     LoggedInScreenComponent,
     GiveUsernameComponent,
     StartsiteComponent,
-    NewUserComponent
+    NewUserComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,

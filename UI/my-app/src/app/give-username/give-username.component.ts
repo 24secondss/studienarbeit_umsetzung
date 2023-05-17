@@ -8,17 +8,17 @@ import { Router } from '@angular/router';
 })
 export class GiveUsernameComponent {
   username = "";
+  usernameErrorMsg = ""
 
   constructor(private router:Router){}
   
   async check_login_method() {
-    this.router.navigate(['/authApp/' + this.username])
-    await fetch("http://" + self.location.host + "/" + this.username)
+    await fetch("http://" + self.location.host + "/api/" + this.username)
       .then(resp => resp.json())
       .then(queryRes => {
         if (queryRes.queryResult[0] == null) {
           console.error("Username not found")
-          // Benutzername nich gefunden, error ausgeben
+          this.usernameErrorMsg = "Username nicht gefunden."
         }
         else {
           if (queryRes.queryResult[0].active2FA == true) {

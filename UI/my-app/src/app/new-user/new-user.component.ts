@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import * as OTPAuth from "otpauth";
 import { Secret } from 'otpauth';
 import * as QRCode from 'qrcode';
@@ -15,6 +16,10 @@ export class NewUserComponent {
   username = "";
   password = "";
   authApp = false;
+  userErrorMsg = "";
+  pwErrorMsg = "";
+
+  constructor(private router:Router){}
 
   generate_new_secret() {
     const secret = new OTPAuth.Secret();
@@ -39,24 +44,35 @@ export class NewUserComponent {
   }
 
   async saveNewUser() {
-    const data = {
-      "username": this.username,
-      "password": this.password,
-      "authAppSecret": this.secretAsBase32,
-      "active2FA": this.authApp
+    if (this.username == "") {
+      this.userErrorMsg = "Sie müssen einen Benutzernamen eingeben!"
     }
-    await fetch("http://" + self.location.host + "/", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
-    .then(resp => {
-      console.log(resp)
-      // navigate
-    })
+    else if (this.password == "" && this.authApp == false) {
+      this.pwErrorMsg = "Wenn Sie keine Authenticator-App einrichten wollen, müssen Sie ein Passwort angeben!"
+    }
+    else {
+      this.userErrorMsg = ""
+      this.pwErrorMsg = ""
+      const data = {
+        "username": this.username,
+        "password": this.password,
+        "authAppSecret": this.secretAsBase32,
+        "active2FA": this.authApp
+      }
+      await fetch("http://" + self.location.host + "/api/", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(resp => {
+        console.log(resp)
+        this.router.navigate(['/logged-in/new'])
+      })
+    }
+    
   }
 
 }

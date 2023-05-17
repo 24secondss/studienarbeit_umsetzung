@@ -3,11 +3,14 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.header_text {
-    border-style: dotted;
-    border-color: green;
+#header_text {
+    border-bottom: 2px ridge black;
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
+}
+
+#warning {
+    color: darkred;
 }

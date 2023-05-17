@@ -12,11 +12,12 @@ import * as QRCode from 'qrcode';
 export class AuthAppLoginComponent {
   token = "";
   userSecret = new OTPAuth.Secret();
+  errorMsg = "";
 
   constructor(private router:Router, private route: ActivatedRoute){}
 
   async login_with_token() {
-    await fetch("http://" + self.location.host + "/" + this.route.snapshot.params['username'])
+    await fetch("http://" + self.location.host + "/api/" + this.route.snapshot.params['username'])
       .then(resp => resp.json())
       .then(queryRes => {
         console.log(queryRes.queryResult[0])
@@ -35,11 +36,11 @@ export class AuthAppLoginComponent {
           const token = this.token;
           const validation = totp.validate({ token, window: 1 });
           if (validation == 0) {
-            this.router.navigate(['/logged-in'])
+            this.router.navigate(['/logged-in/auth'])
           }
           else {
             console.log("Token invalid")
-            // Error anzeigen
+            this.errorMsg = "Token invalid";
           }
         }
       })

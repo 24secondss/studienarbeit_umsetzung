@@ -6,14 +6,16 @@ import { GiveUsernameComponent } from './give-username/give-username.component';
 import { LoggedInScreenComponent } from './logged-in-screen/logged-in-screen.component';
 import { StartsiteComponent } from './startsite/startsite.component';
 import { NewUserComponent } from './new-user/new-user.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
-  {path:'authApp/:username', component: AuthAppLoginComponent},
-  {path:'normal-login/:username', component: NormalLoginComponent},
-  {path: 'logged-in', component: LoggedInScreenComponent},
+  {path: 'authApp/:username', component: AuthAppLoginComponent},
+  {path: 'normal-login/:username', component: NormalLoginComponent},
+  {path: 'logged-in/:msg', component: LoggedInScreenComponent},
   {path: 'begin', component: GiveUsernameComponent},
   {path: 'newUser', component: NewUserComponent},
-  {path: '', component: StartsiteComponent}
+  {path: '', component: StartsiteComponent},
+  {path: '**', component: PagenotfoundComponent}
 ];
 
 @NgModule({

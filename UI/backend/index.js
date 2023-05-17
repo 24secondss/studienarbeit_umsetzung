@@ -78,13 +78,13 @@ app.use(express.static('/backend/dist/'));
 app.use(cors());
 app.use(express.json());
 
-app.get('/:username', function(req, res) {
+app.get('/api/:username', function(req, res) {
   let sqlQueryStatement = `SELECT * FROM users WHERE username = '${req.params.username}';`; 
   console.log(sqlQueryStatement)
   queryDatabase_GET(sqlQueryStatement, res);
 });
 
-app.post('/', function(req, res) {
+app.post('/api/', function(req, res) {
   console.log(req.body)
   let sqlQueryStatement = `INSERT INTO users VALUES ('${req.body.username}', '${req.body.password}', '${req.body.authAppSecret}', ${req.body.active2FA});`; 
   queryDatabase_POST(sqlQueryStatement, res);
