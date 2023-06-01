@@ -11,6 +11,9 @@ export class LoggedInScreenComponent {
   
   constructor(private router:Router, private route:ActivatedRoute){}
 
+  /**
+   * decides on load of the website, which text is displayed
+   */
   ngOnInit() {
     if (this.route.snapshot.params['msg'] == "auth") {
       this.msg = "Herzlichen Glückwunsch, Sie haben sich erfolgreich mit Hilfe einer Authenticator-App eingeloggt."
@@ -23,6 +26,9 @@ export class LoggedInScreenComponent {
     }
   }
 
+  /**
+   * logs the user out by navigating to the startpage
+   */
   logout() {
     this.router.navigate([''])
   }

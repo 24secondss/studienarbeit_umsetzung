@@ -12,6 +12,10 @@ export class GiveUsernameComponent {
 
   constructor(private router:Router){}
   
+  /**
+   * checks, if the user needs to login with a passwort or can login with authenticator-app
+   * checks the database for the 'active2FA' field
+   */
   async check_login_method() {
     await fetch("http://" + self.location.host + "/api/" + this.username)
       .then(resp => resp.json())

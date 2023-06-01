@@ -10,10 +10,16 @@ export class StartsiteComponent {
 
   constructor(private router:Router){}
 
-  begin() {
+  /**
+   * starts the login-process by navigating the user to the loginpage
+   */
+  login() {
     this.router.navigate(['/begin'])
   }
 
+  /**
+   * starts the register-process by navigating the user to the registerpage
+   */
   newUser() {
     this.router.navigate(['/newUser'])
   }

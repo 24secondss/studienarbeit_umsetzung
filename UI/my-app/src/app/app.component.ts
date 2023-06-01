@@ -11,6 +11,9 @@ export class AppComponent {
   
   constructor(private router:Router){}
 
+  /**
+   * navigates to startpage
+   */
   navigate_home() {
     this.router.navigate(['']);
   }

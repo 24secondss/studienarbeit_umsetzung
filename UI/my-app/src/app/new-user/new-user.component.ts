@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as OTPAuth from "otpauth";
-import { Secret } from 'otpauth';
 import * as QRCode from 'qrcode';
 
 @Component({
@@ -21,6 +20,9 @@ export class NewUserComponent {
 
   constructor(private router:Router){}
 
+  /**
+   * Generates new authenticator-secret and displays it as a qr-code on the website
+   */
   generate_new_secret() {
     const secret = new OTPAuth.Secret();
     const totp = new OTPAuth.TOTP({
@@ -43,6 +45,9 @@ export class NewUserComponent {
     })
   }
 
+  /**
+   * saves a new user in the database, using the inputs from the user over the website
+   */
   async saveNewUser() {
     if (this.username == "") {
       this.userErrorMsg = "Sie müssen einen Benutzernamen eingeben!"

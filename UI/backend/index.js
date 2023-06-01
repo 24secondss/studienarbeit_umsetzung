@@ -4,6 +4,10 @@ const cors = require("cors")
 
 const mariadb = require("mariadb");
 
+/**
+ * Uses predefined SQL-statement to query database (GET)
+ * uses predefined SQL-statement, sends http-response
+ */
 async function queryDatabase_GET(statement, response) {
   try {
     console.log("Beginn Connection");
@@ -39,6 +43,10 @@ async function queryDatabase_GET(statement, response) {
   } 
 }
 
+/**
+ * Uses predefined SQL-statement to query database (POST)
+ * uses predefined SQL-statement, sends http-response
+ */
 async function queryDatabase_POST(statement, response) {
   try {
     console.log("Beginn Connection");
@@ -58,7 +66,6 @@ async function queryDatabase_POST(statement, response) {
         console.log(res);
         response.send({
           status: 200,
-          // "test": {res},               ==> Query failed due to error:TypeError: Do not know how to serialize a BigInt
           message: "Query completed"
         })
       })
@@ -74,22 +81,44 @@ async function queryDatabase_POST(statement, response) {
   } 
 }
 
+/**
+ * Defines Frontendhsoting
+ */
 app.use(express.static('/backend/dist/'));
+
+/**
+ * Using Cors for secure communication
+ */
 app.use(cors());
+
+/**
+ * Using express.json for parsing request-body
+ */
 app.use(express.json());
 
+/**
+ * Receives get requests and creates an select SQL-statement
+ * uses incoming http-request and response
+ */
 app.get('/api/:username', function(req, res) {
   let sqlQueryStatement = `SELECT * FROM users WHERE username = '${req.params.username}';`; 
   console.log(sqlQueryStatement)
   queryDatabase_GET(sqlQueryStatement, res);
 });
 
+/**
+ * Receives post requests and creates an input SQL-statement
+ * uses incoming http-request and response
+ */
 app.post('/api/', function(req, res) {
   console.log(req.body)
   let sqlQueryStatement = `INSERT INTO users VALUES ('${req.body.username}', '${req.body.password}', '${req.body.authAppSecret}', ${req.body.active2FA});`; 
   queryDatabase_POST(sqlQueryStatement, res);
 });
 
+/**
+ * Opens Backend on Port 3000 for usage
+ */
 app.listen(3000, () => {
   console.log("App listening on port 3000");
 });

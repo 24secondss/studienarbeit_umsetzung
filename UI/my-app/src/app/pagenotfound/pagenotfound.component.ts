@@ -10,6 +10,9 @@ export class PagenotfoundComponent {
 
   constructor(private router:Router){}
 
+  /**
+   * navigates back to startpage
+   */
   back_to_start() {
     this.router.navigate([''])
   }

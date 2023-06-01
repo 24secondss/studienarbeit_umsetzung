@@ -1,3 +1,5 @@
+-- Skript to initialize the Database
+
 USE userDB;
 
 CREATE TABLE users (username VARCHAR(20), password VARCHAR(20), authAppSecret VARCHAR(50), active2FA BOOLEAN);

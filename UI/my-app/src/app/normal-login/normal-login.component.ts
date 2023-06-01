@@ -13,6 +13,10 @@ export class NormalLoginComponent {
 
   constructor(private router:Router, private route: ActivatedRoute){}
 
+  /**
+   * Checks if given and saved passwords match
+   * NOTE: passwords are NOT hashed!
+   */
   async login_with_credentials() {
     await fetch("http://" + self.location.host + "/api/" + this.route.snapshot.params['username'])
       .then(resp => resp.json())
